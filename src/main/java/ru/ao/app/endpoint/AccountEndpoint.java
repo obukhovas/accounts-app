@@ -1,5 +1,7 @@
 package ru.ao.app.endpoint;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.ao.app.access.model.Account;
 import ru.ao.app.business.AccountBusinessService;
 import ru.ao.app.endpoint.dto.AccountsRsDTO;
@@ -21,12 +23,15 @@ import static java.util.Objects.nonNull;
 @Produces(MediaType.APPLICATION_JSON)
 public class AccountEndpoint {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountEndpoint.class);
+
     @Inject
     private AccountBusinessService accountBusinessService;
 
     @GET
     @Path("/all")
     public Response getAll() {
+        LOGGER.debug("/getAll invoked");
         List<Account> accounts = accountBusinessService.getAll();
         AccountsRsDTO entity = AccountMapper.fromEntities(accounts);
         return Response.ok()
@@ -37,6 +42,7 @@ public class AccountEndpoint {
     @GET
     @Path("/{id}")
     public Response getById(@PathParam("id") long id) {
+        LOGGER.debug("/getById invoked with id = {}", id);
         Account account = accountBusinessService.getById(id);
         if (nonNull(account)) {
             return Response.ok()
@@ -50,6 +56,7 @@ public class AccountEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/create")
     public Response create(@Valid CreateAccountRqDTO createAccountRqDTO) {
+        LOGGER.debug("/create invoked");
         Account account = AccountMapper.fromDTO(createAccountRqDTO);
         Account created = accountBusinessService.create(account);
         return Response.status(Response.Status.CREATED)
@@ -60,6 +67,7 @@ public class AccountEndpoint {
     @DELETE
     @Path("/delete/{id}")
     public Response delete(@PathParam("id") long id) {
+        LOGGER.debug("/delete invoked with id = {}", id);
         Account deleted = accountBusinessService.delete(id);
         return Response.ok()
                 .entity(AccountMapper.fromEntity(deleted))
@@ -70,6 +78,7 @@ public class AccountEndpoint {
     @Path("/{id}/withdraw/{amount}")
     public Response withdraw(@PathParam("id") long id,
                              @PathParam("amount") BigDecimal amount) {
+        LOGGER.debug("/withdraw invoked with id = {}", id);
         Account account = accountBusinessService.withdraw(id, amount);
         return Response.ok()
                 .entity(AccountMapper.fromEntity(account))
@@ -80,6 +89,7 @@ public class AccountEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/transfer")
     public Response transfer(@Valid TransferMoneyRqDTO transferMoneyRqDTO) {
+        LOGGER.debug("/transfer invoked");
         accountBusinessService.transfer(
                 transferMoneyRqDTO.getFromAccountId(),
                 transferMoneyRqDTO.getToAccountId(),

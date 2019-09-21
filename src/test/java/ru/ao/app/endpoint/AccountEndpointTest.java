@@ -128,13 +128,13 @@ public class AccountEndpointTest {
     @Test
     public void withdrawTest() throws Exception {
 
-        HttpPost httpPost = httpPost("/acc-app/accounts/7/withdraw/400");
+        HttpPost httpPost = httpPost("/acc-app/accounts/4/withdraw/400");
 
         HttpResponse response = httpClient.execute(httpPost);
         assertEquals(Status.OK.getStatusCode(), response.getStatusLine().getStatusCode());
 
         AccountRsDTO actual = fromInputStream(response.getEntity().getContent(), AccountRsDTO.class);
-        assertEquals(BigDecimal.valueOf(41000), actual.getBalance());
+        assertEquals(BigDecimal.valueOf(28600) /* 29000 - 400 */, actual.getBalance());
 
         /* not exist */
         httpPost = httpPost("/acc-app/accounts/9999/withdraw/400");
