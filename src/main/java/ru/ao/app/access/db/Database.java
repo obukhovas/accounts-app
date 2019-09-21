@@ -6,6 +6,8 @@ public interface Database {
 
     Connection getConnection();
 
+    void initialize();
+
     void initializeTestData();
 
 }

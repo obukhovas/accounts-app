@@ -4,6 +4,8 @@ import org.h2.tools.RunScript;
 import ru.ao.app.business.exception.BusinessException;
 
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -36,7 +38,18 @@ public class H2Database implements Database {
     }
 
     @Override
+    public void initialize() {
+        try (Connection conn = getConnection()) {
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream("account-table.sql");
+            RunScript.execute(conn, new InputStreamReader(is));
+        } catch (Exception e) {
+            throw new BusinessException(INITIALIZE_TEST_DATA_ERROR, e);
+        }
+    }
+
+    @Override
     public void initializeTestData() {
+        initialize();
         try (Connection conn = getConnection()) {
             RunScript.execute(conn, new FileReader("src/test/resources/db/h2-init.sql"));
         } catch (Exception e) {

@@ -8,6 +8,10 @@ public final class DatabaseUtil {
         throw new AssertionError("Utility class");
     }
 
+    public static void initialize() {
+        DataBaseFactory.getDataBase(DataBaseFactory.H2).initialize();
+    }
+
     public static void initializeTestData() {
         DataBaseFactory.getDataBase(DataBaseFactory.H2).initializeTestData();
     }
