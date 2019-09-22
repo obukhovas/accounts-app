@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.ao.app</groupId>
-    <artifactId>rest-accounts</artifactId>
+    <artifactId>accounts-app</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
