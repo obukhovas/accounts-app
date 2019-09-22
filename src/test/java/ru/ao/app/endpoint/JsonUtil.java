@@ -10,8 +10,6 @@ public final class JsonUtil {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    private static final String DESERIALIZATION_ERROR = "Deserialization error";
-
     private JsonUtil() {
         throw new AssertionError("Utility class");
     }
@@ -20,7 +18,7 @@ public final class JsonUtil {
         try {
             return MAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(DESERIALIZATION_ERROR, e);
+            throw new RuntimeException("Serialization error", e);
         }
     }
 

@@ -3,19 +3,16 @@ package ru.ao.app.endpoint.config;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 
-import javax.ws.rs.ext.ContextResolver;
+public class AppJacksonJaxbJsonProvider extends JacksonJaxbJsonProvider {
 
-public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
     private final ObjectMapper defaultObjectMapper;
 
-    public ObjectMapperProvider() {
+    public AppJacksonJaxbJsonProvider() {
+        super();
         defaultObjectMapper = createDefaultMapper();
-    }
-
-    @Override
-    public ObjectMapper getContext(final Class<?> type) {
-        return defaultObjectMapper;
+        setMapper(defaultObjectMapper);
     }
 
     private static ObjectMapper createDefaultMapper() {

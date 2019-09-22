@@ -12,26 +12,23 @@ public class AccountRsDTO {
         return id;
     }
 
-    public AccountRsDTO setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public AccountRsDTO setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
 
     public BigDecimal getBalance() {
         return balance;
     }
 
-    public AccountRsDTO setBalance(BigDecimal balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
-        return this;
     }
 }

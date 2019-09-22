@@ -18,7 +18,7 @@ public class AppConfig extends ResourceConfig {
                 bind(new AccountBusinessServiceImpl(accountAccessService)).to(AccountBusinessService.class);
             }
         });
-        register(ObjectMapperProvider.class);
+        register(AppJacksonJaxbJsonProvider.class);
         register(AppExceptionMapper.class);
         register(ConstraintViolationExceptionMapper.class);
     }
