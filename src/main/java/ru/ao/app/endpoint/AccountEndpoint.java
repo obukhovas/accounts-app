@@ -65,7 +65,7 @@ public class AccountEndpoint {
     }
 
     @DELETE
-    @Path("/delete/{id}")
+    @Path("/{id}")
     public Response delete(@PathParam("id") long id) {
         LOGGER.debug("/delete invoked with id = {}", id);
         Account deleted = accountBusinessService.delete(id);

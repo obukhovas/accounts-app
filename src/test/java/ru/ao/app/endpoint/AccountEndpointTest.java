@@ -107,7 +107,7 @@ public class AccountEndpointTest {
 
     @Test
     public void deleteTest() throws Exception {
-        HttpDelete httpDelete = httpDelete("/acc-app/accounts/delete/2");
+        HttpDelete httpDelete = httpDelete("/acc-app/accounts/2");
 
         HttpResponse response = httpClient.execute(httpDelete);
         assertEquals(Status.OK.getStatusCode(), response.getStatusLine().getStatusCode());
@@ -117,7 +117,7 @@ public class AccountEndpointTest {
         assertEquals(BigDecimal.valueOf(9000), actual.getBalance());
 
         /* not exist */
-        httpDelete = httpDelete("/acc-app/accounts/delete/9999");
+        httpDelete = httpDelete("/acc-app/accounts/9999");
         response = httpClient.execute(httpDelete);
         assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatusLine().getStatusCode());
 
