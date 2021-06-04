@@ -18,7 +18,7 @@
         <slf4j.version>1.7.26</slf4j.version>
 
         <junit.version>4.12</junit.version>
-        <httpclient.version>4.5.2</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
 
         <port>8080</port>
     </properties>
